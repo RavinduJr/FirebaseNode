@@ -6,3 +6,14 @@ variables:
 stages:
   - test
   - deploy
+
+before_script:
+  - cd functions
+
+deploy:
+  stage: deploy
+  script:
+    - firebase use default
+    - firebase deploy --project=default --only functions:groupCloudFunctions --force
+  rules:
+    - when: manual
